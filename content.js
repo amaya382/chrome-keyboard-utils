@@ -11,7 +11,21 @@
     '[contenteditable="true"]',
     '[contenteditable="plaintext-only"]',
   ].join(',');
-  const LINK_SELECTOR = 'a[href], [role="link"]';
+  const CLICKABLE_SELECTOR = [
+    'a',
+    'button',
+    'select',
+    'input',
+    'textarea',
+    'summary',
+    '[onclick]',
+    '[contenteditable=true]',
+    '.jfk-button',
+    '.goog-flat-menu-button',
+    ...['button', 'link', 'menuitem', 'option', 'switch', 'tab', 'checkbox', 'combobox', 'menuitemcheckbox', 'menuitemradio']
+      .map((role) => `[role=${role}]`),
+  ].join(',');
+  const CLICKABLE_ANCESTOR_SELECTOR = 'a, [onclick], [contenteditable=true], .jfk-button, .goog-flat-menu-button';
 
   let settings = mergeSettings();
   let bindings = [];
@@ -330,14 +344,64 @@
     }
   }
 
+  // Same heuristic as Surfingkeys: known interactive elements, anything styled as clickable, and descendants of clickable containers.
+  function isClickable(el) {
+    if (el.disabled) return false;
+    if (el.matches(CLICKABLE_SELECTOR) || el.closest(CLICKABLE_ANCESTOR_SELECTOR)) return true;
+    const { cursor } = getComputedStyle(el);
+    return cursor === 'pointer' || cursor.startsWith('url(');
+  }
+
+  const isOnScreen = (rect) =>
+    rect.width > 0 && rect.height > 0 && rect.bottom >= 0 && rect.right >= 0 && rect.top <= innerHeight && rect.left <= innerWidth;
+
+  // Collapses nested candidates to one hint each: a link keeps its hint, any other container yields to its innermost candidate.
+  function collapseNested(targets) {
+    const result = [];
+    for (const target of targets) {
+      const containerIndex = result.findIndex((r) => r.el.contains(target.el));
+      if (containerIndex >= 0) {
+        const container = result[containerIndex].el;
+        if (container.tagName !== 'A' || !container.href) result[containerIndex] = target;
+      } else if (!result.some((r) => target.el.contains(r.el))) {
+        result.push(target);
+      }
+    }
+    return result;
+  }
+
+  function activate(el) {
+    if (isEditable(el)) {
+      focusEditable(el);
+      return;
+    }
+    el.focus({ preventScroll: true });
+    if (el.tagName === 'SELECT') {
+      try {
+        el.showPicker();
+      } catch {
+        // showPicker is unavailable for some select states, such as when the element is not rendered.
+      }
+      return;
+    }
+    // Many web apps react to press events rather than click, so replay the full sequence a real click produces.
+    for (const type of ['pointerdown', 'mousedown', 'pointerup', 'mouseup']) {
+      const EventType = type.startsWith('pointer') ? PointerEvent : MouseEvent;
+      el.dispatchEvent(new EventType(type, { bubbles: true, cancelable: true, composed: true, view: window }));
+    }
+    el.click();
+  }
+
   function followLink() {
-    const links = [...document.querySelectorAll(LINK_SELECTOR)];
-    showHints(visibleTargets(links), (el, { newTab }) => {
+    const candidates = [...(document.body ?? document.documentElement).querySelectorAll('*')].filter(
+      (el) => isOnScreen(el.getBoundingClientRect()) && isClickable(el),
+    );
+    showHints(collapseNested(visibleTargets(candidates)), (el, { newTab }) => {
       const url = el.href;
       if (newTab && typeof url === 'string' && !url.startsWith('javascript:')) {
         chrome.runtime.sendMessage({ type: 'openTab', url });
       } else {
-        el.click();
+        activate(el);
       }
     });
   }

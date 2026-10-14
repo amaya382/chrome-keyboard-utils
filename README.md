@@ -9,7 +9,7 @@ A minimal Chrome extension for Vim-like keyboard navigation.
 | `h` / `j` / `k` / `l` | Scroll left / down / up / right. Accepts a count prefix (e.g. `5j`) |
 | `gg` / `G` | Jump to the top / bottom of the page |
 | `i` | Focus an input field. If several are visible, shows hints to pick one |
-| `f` | Show hints for links, with each target outlined, and follow the selected one. Type the hint with `Shift` to open it in a new background tab |
+| `f` | Show hints for clickable elements (links, buttons, form controls, and elements styled as clickable), with each target outlined, and click the selected one. Type the hint with `Shift` to open a link in a new background tab |
 | `Esc` | Leave the focused input field, or cancel hints |
 
 Keys are ignored while an input field is focused, so typing works as usual.
