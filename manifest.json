@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Chrome Vim",
+  "name": "Keyboard Utils",
   "version": "0.1.0",
   "description": "Minimal Vim-like keyboard navigation for Chrome",
   "icons": {

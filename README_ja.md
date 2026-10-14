@@ -1,15 +1,15 @@
 <p align="right"><a href="README.md">English</a> / <strong>日本語</strong></p>
 
-<h1 align="center">⌨️ chrome-vim</h1>
+<h1 align="center">⌨️ Keyboard Utils</h1>
 
 <p align="center">
   <strong>Chrome のための最小限の Vim 風キーボード操作</strong><br/>
   スクロール、ジャンプ、入力欄へのフォーカス、ヒントによるクリックをホームポジションのまま行える。
 </p>
 
-chrome-vim は plain JavaScript で書いた Manifest V3 の Chrome 拡張機能である。ビルドは不要で、リポジトリのディレクトリがそのまま拡張機能になる。
+Keyboard Utils は plain JavaScript で書いた Manifest V3 の Chrome 拡張機能である。ビルドは不要で、リポジトリのディレクトリがそのまま拡張機能になる。
 
-## Why chrome-vim?
+## Why Keyboard Utils?
 
 - **目立つ要素を優先するヒント** — 大きく目立つ要素ほど、押しやすい文字でできた短いラベルを付ける。ヒントの対象は枠で囲まれ、ラベルがどの要素を指すかがわかる
 - **小さな機能範囲** — コマンドは 8 つで、要求する permission は `storage` だけ
@@ -22,7 +22,7 @@ chrome-vim は plain JavaScript で書いた Manifest V3 の Chrome 拡張機能
 1. このリポジトリを clone する
 
    ```bash
-   git clone https://github.com/amaya382/chrome-vim.git
+   git clone https://github.com/amaya382/chrome-keyboard-utils.git
    ```
 
 2. `chrome://extensions/` を開く
@@ -39,7 +39,7 @@ chrome-vim は plain JavaScript で書いた Manifest V3 の Chrome 拡張機能
 
 `h` / `j` / `k` / `l` で、設定したスクロール量だけ左 / 下 / 上 / 右にスクロールする。キーの前に数字を打つとその回数だけ繰り返し、`5j` なら 5 回分スクロールする。`gg` と `G` は最上部と最下部へ移動し、数字は無視する。
 
-内側のペインをスクロールさせる Web アプリのように、ドキュメント自体がスクロールできないページもある。その場合 chrome-vim は画面中央の要素から親をたどり、最初に見つかったスクロールできる要素を動かす。
+内側のペインをスクロールさせる Web アプリのように、ドキュメント自体がスクロールできないページもある。その場合 Keyboard Utils は画面中央の要素から親をたどり、最初に見つかったスクロールできる要素を動かす。
 
 ### ヒント
 
@@ -61,7 +61,7 @@ chrome-vim は plain JavaScript で書いた Manifest V3 の Chrome 拡張機能
 
 `i` で入力欄にフォーカスする。画面内の入力欄が 1 つならそのままフォーカスし、複数あればヒントを出す。画面内に 1 つもなければ、ページ内で最初の入力欄にフォーカスする。
 
-入力欄にフォーカスがある間、chrome-vim は `Esc` 以外のキーをすべてページに渡す。`Esc` を押すと入力欄から抜ける。
+入力欄にフォーカスがある間、Keyboard Utils は `Esc` 以外のキーをすべてページに渡す。`Esc` を押すと入力欄から抜ける。
 
 ## ⌨️ Keys
 
@@ -84,7 +84,7 @@ chrome-vim は plain JavaScript で書いた Manifest V3 の Chrome 拡張機能
 | Keys | [Keys](#️-keys) を参照 | コマンドごとのキー列 |
 | Hint characters | `asdfgqwertzxcvb` | ヒントのラベルに使う文字。押しやすい順に並べる |
 | Scroll step | `60` | `h` / `j` / `k` / `l` 1 回でスクロールするピクセル数 |
-| Disabled URLs | (空) | 1 行に 1 つの正規表現。どれか 1 つでもページの URL に一致すると chrome-vim を無効にする |
+| Disabled URLs | (空) | 1 行に 1 つの正規表現。どれか 1 つでもページの URL に一致すると Keyboard Utils を無効にする |
 
 特殊キーは `KeyboardEvent.key` の名前を山括弧で囲んで書く (例: `<Enter>`)。
 
@@ -114,7 +114,7 @@ YouTube などのサイトは同じキーを使う。そのサイトの正規表
 
 ### 埋め込みコンテンツをクリックした後にキー操作ができない
 
-chrome-vim はトップレベルのフレームでだけ動く。フォーカスが iframe の中にあるときは、iframe の外をクリックしてページにフォーカスを戻す。
+Keyboard Utils はトップレベルのフレームでだけ動く。フォーカスが iframe の中にあるときは、iframe の外をクリックしてページにフォーカスを戻す。
 
 ### ヒントが付かない要素がある
 

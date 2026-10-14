@@ -1,15 +1,15 @@
 <p align="right"><strong>English</strong> / <a href="README_ja.md">日本語</a></p>
 
-<h1 align="center">⌨️ chrome-vim</h1>
+<h1 align="center">⌨️ Keyboard Utils</h1>
 
 <p align="center">
   <strong>Minimal Vim-like keyboard navigation for Chrome.</strong><br/>
   Scroll, jump, focus input fields, and click anything through hints, all from the home row.
 </p>
 
-chrome-vim is a Manifest V3 Chrome extension written in plain JavaScript. There is no build step: the repository directory is the extension.
+Keyboard Utils is a Manifest V3 Chrome extension written in plain JavaScript. There is no build step: the repository directory is the extension.
 
-## Why chrome-vim?
+## Why Keyboard Utils?
 
 - **Prominent-first hints** — larger, more prominent elements get shorter labels made of easier characters, and every hinted element is outlined so each label is tied to its target
 - **Small surface** — eight commands, and `storage` is the only permission it requests
@@ -22,7 +22,7 @@ chrome-vim is a Manifest V3 Chrome extension written in plain JavaScript. There 
 1. Clone this repository
 
    ```bash
-   git clone https://github.com/amaya382/chrome-vim.git
+   git clone https://github.com/amaya382/chrome-keyboard-utils.git
    ```
 
 2. Open `chrome://extensions/`
@@ -39,7 +39,7 @@ To update, run `git pull` and click the reload button on the extension's card in
 
 `h` / `j` / `k` / `l` scroll left / down / up / right by the configured step. A number typed before the key repeats it, so `5j` scrolls five steps. `gg` and `G` jump to the top and bottom and ignore the number.
 
-When the document itself cannot scroll, as in many web apps that scroll an inner pane, chrome-vim walks up from the element at the center of the viewport and scrolls the first ancestor that can.
+When the document itself cannot scroll, as in many web apps that scroll an inner pane, Keyboard Utils walks up from the element at the center of the viewport and scrolls the first ancestor that can.
 
 ### Hints
 
@@ -61,7 +61,7 @@ The selected element is handled by its kind. An input field gets focus, a `<sele
 
 `i` focuses an input field. With exactly one input field in the viewport, it is focused directly. With several, hints appear for them. With none in the viewport, the first input field on the page is focused.
 
-While an input field is focused, chrome-vim leaves every key to the page except `Esc`, which leaves the field.
+While an input field is focused, Keyboard Utils leaves every key to the page except `Esc`, which leaves the field.
 
 ## ⌨️ Keys
 
@@ -84,7 +84,7 @@ Open the options page from the extension's "Details" → "Extension options".
 | Keys | See [Keys](#️-keys) | Key sequence for each command |
 | Hint characters | `asdfgqwertzxcvb` | Characters for hint labels, ordered from easiest to hardest |
 | Scroll step | `60` | Pixels scrolled per `h` / `j` / `k` / `l` |
-| Disabled URLs | (empty) | Regular expressions, one per line. chrome-vim is disabled on pages whose URL matches any of them |
+| Disabled URLs | (empty) | Regular expressions, one per line. Keyboard Utils is disabled on pages whose URL matches any of them |
 
 Special keys are written as their `KeyboardEvent.key` name in angle brackets, e.g. `<Enter>`.
 
@@ -109,7 +109,7 @@ Sites such as YouTube use the same keys. Add a regular expression for the site t
 
 ### Keys do nothing after clicking into embedded content
 
-chrome-vim runs only in the top-level frame. When focus is inside an iframe, click outside it to return focus to the page.
+Keyboard Utils runs only in the top-level frame. When focus is inside an iframe, click outside it to return focus to the page.
 
 ### Some elements get no hint
 
