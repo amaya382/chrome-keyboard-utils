@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Chrome Vim Options</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family: system-ui, sans-serif;
+        font-size: 14px;
+      }
+      body {
+        max-width: 640px;
+        margin: 32px auto;
+        padding: 0 16px;
+      }
+      h1 {
+        font-size: 20px;
+      }
+      fieldset {
+        margin: 0 0 20px;
+        border: 1px solid #8884;
+        border-radius: 6px;
+      }
+      legend {
+        font-weight: bold;
+      }
+      label {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        align-items: center;
+        gap: 8px;
+        margin: 6px 0;
+      }
+      input,
+      textarea {
+        font: 13px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        padding: 4px 6px;
+      }
+      textarea {
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .note {
+        color: #888;
+        font-size: 12px;
+        margin: 4px 0;
+      }
+      #status {
+        margin-left: 12px;
+      }
+      #status.error {
+        color: #d33;
+        white-space: pre-line;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Chrome Vim</h1>
+    <form id="form">
+      <fieldset id="keys">
+        <legend>Keys</legend>
+        <p class="note">Special keys are written in angle brackets, e.g. <code>&lt;Enter&gt;</code>.</p>
+      </fieldset>
+      <fieldset>
+        <legend>Hints</legend>
+        <label>Hint characters <input id="hintChars" /></label>
+        <p class="note">Ordered from easiest to hardest. More prominent elements get the earlier characters.</p>
+      </fieldset>
+      <fieldset>
+        <legend>Scroll</legend>
+        <label>Scroll step (px) <input id="scrollStep" type="number" min="1" /></label>
+      </fieldset>
+      <fieldset>
+        <legend>Disabled URLs</legend>
+        <p class="note">One regular expression per line. The extension is disabled when any of them matches the page URL.</p>
+        <textarea id="disabledUrlPatterns" rows="6" spellcheck="false"></textarea>
+      </fieldset>
+      <button type="submit">Save</button>
+      <button type="button" id="reset">Restore defaults</button>
+      <span id="status"></span>
+    </form>
+    <script src="settings.js"></script>
+    <script src="options.js"></script>
+  </body>
+</html>
