@@ -12,7 +12,7 @@ Keyboard Utils は plain JavaScript で書いた Manifest V3 の Chrome 拡張�
 ## Why Keyboard Utils?
 
 - **目立つ要素を優先するヒント** — 大きく目立つ要素ほど、押しやすい文字でできた短いラベルを付ける。ヒントの対象は枠で囲まれ、ラベルがどの要素を指すかがわかる
-- **小さな機能範囲** — コマンドは 8 つで、要求する permission は `storage` だけ
+- **小さな機能範囲** — コマンドは 10 個で、要求する permission は `storage` だけ
 - **邪魔をしない** — 入力欄にフォーカスがある間はキーをそのままページに渡す。URL の正規表現でサイトごとに無効化できる
 
 ## 🚀 Quick Start
@@ -71,6 +71,7 @@ Keyboard Utils は plain JavaScript で書いた Manifest V3 の Chrome 拡張�
 | `gg` / `G` | ページの最上部 / 最下部へ移動 |
 | `i` | 入力欄にフォーカス。複数見えていればヒントを出す |
 | `f` | クリックできる要素にヒントを出し、選んだ要素をクリック。`Shift` を押しながらラベルを打つとリンクをバックグラウンドの新しいタブで開く |
+| `Backspace` / `Shift` + `Backspace` | 履歴を戻る / 進む。数字の前置に対応 (例: `3` に続けて `Backspace` で 3 ページ戻る) |
 | `Esc` | 入力欄から抜ける。ヒントを閉じる |
 
 `Esc` 以外のキーは設定で変えられる。
@@ -86,7 +87,7 @@ Keyboard Utils は plain JavaScript で書いた Manifest V3 の Chrome 拡張�
 | Scroll step | `60` | `h` / `j` / `k` / `l` 1 回でスクロールするピクセル数 |
 | Disabled URLs | (空) | 1 行に 1 つの正規表現。どれか 1 つでもページの URL に一致すると Keyboard Utils を無効にする |
 
-特殊キーは `KeyboardEvent.key` の名前を山括弧で囲んで書く (例: `<Enter>`)。
+特殊キーは `KeyboardEvent.key` の名前を山括弧で囲んで書く (例: `<Enter>`)。`Shift` 付きは名前の前に `S-` を付ける (例: `<S-Backspace>`)。
 
 次の場合は保存できない。
 

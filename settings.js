@@ -8,6 +8,8 @@ const DEFAULT_SETTINGS = {
     scrollToBottom: 'G',
     focusInput: 'i',
     followLink: 'f',
+    historyBack: '<Backspace>',
+    historyForward: '<S-Backspace>',
   },
   hintChars: 'asdfgqwertzxcvb',
   scrollStep: 60,
@@ -31,7 +33,7 @@ function saveSettings(settings) {
   return chrome.storage.sync.set({ settings });
 }
 
-// A key sequence is written as characters, with special keys as their KeyboardEvent.key name in angle brackets (e.g. `<Enter>`).
+// A key sequence is written as characters, with special keys as their KeyboardEvent.key name in angle brackets (e.g. `<Enter>`, or `<S-Enter>` with Shift).
 function parseKeySequence(sequence) {
   return [...sequence.matchAll(/<([^<>]+)>|./gsu)].map((m) => m[1] ?? m[0]);
 }

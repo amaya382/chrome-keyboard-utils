@@ -76,6 +76,9 @@
 
   const startsWith = (keys, prefix) => prefix.every((key, i) => keys[i] === key);
 
+  // Shift is already reflected in printable keys such as `G`, so only special keys carry an explicit `S-` prefix.
+  const keyName = (event) => (event.shiftKey && event.key.length > 1 ? `S-${event.key}` : event.key);
+
   // Registered at document_start in the capture phase so page shortcuts never see handled keys.
   window.addEventListener(
     'keydown',
@@ -102,7 +105,7 @@
         return;
       }
 
-      pendingKeys.push(event.key);
+      pendingKeys.push(keyName(event));
       const matched = bindings.find((b) => b.keys.length === pendingKeys.length && startsWith(b.keys, pendingKeys));
       if (matched) {
         const count = Number(countDigits) || 1;
@@ -415,5 +418,7 @@
     scrollToBottom: () => scrollToEdge(true),
     focusInput,
     followLink,
+    historyBack: (count) => history.go(-count),
+    historyForward: (count) => history.go(count),
   };
 })();

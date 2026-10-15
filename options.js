@@ -7,6 +7,8 @@ const COMMAND_LABELS = {
   scrollToBottom: 'Scroll to bottom',
   focusInput: 'Focus input',
   followLink: 'Follow link',
+  historyBack: 'Go back',
+  historyForward: 'Go forward',
 };
 
 const form = document.getElementById('form');

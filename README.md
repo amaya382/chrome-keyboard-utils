@@ -12,7 +12,7 @@ Keyboard Utils is a Manifest V3 Chrome extension written in plain JavaScript. Th
 ## Why Keyboard Utils?
 
 - **Prominent-first hints** — larger, more prominent elements get shorter labels made of easier characters, and every hinted element is outlined so each label is tied to its target
-- **Small surface** — eight commands, and `storage` is the only permission it requests
+- **Small surface** — ten commands, and `storage` is the only permission it requests
 - **Stays out of the way** — keys pass through untouched while an input field is focused, and regular expressions on the URL turn the extension off per site
 
 ## 🚀 Quick Start
@@ -71,6 +71,7 @@ While an input field is focused, Keyboard Utils leaves every key to the page exc
 | `gg` / `G` | Jump to the top / bottom of the page |
 | `i` | Focus an input field, with hints when several are visible |
 | `f` | Show hints for clickable elements and click the selected one. `Shift` + label opens a link in a new background tab |
+| `Backspace` / `Shift` + `Backspace` | Go back / forward in history. Accepts a count prefix (e.g. `3` then `Backspace` goes back three pages) |
 | `Esc` | Leave the focused input field, or close hints |
 
 Every key except `Esc` can be changed in the options.
@@ -86,7 +87,7 @@ Open the options page from the extension's "Details" → "Extension options".
 | Scroll step | `60` | Pixels scrolled per `h` / `j` / `k` / `l` |
 | Disabled URLs | (empty) | Regular expressions, one per line. Keyboard Utils is disabled on pages whose URL matches any of them |
 
-Special keys are written as their `KeyboardEvent.key` name in angle brackets, e.g. `<Enter>`.
+Special keys are written as their `KeyboardEvent.key` name in angle brackets, e.g. `<Enter>`. Prefix the name with `S-` for `Shift`, e.g. `<S-Backspace>`.
 
 Saving is rejected when a key is empty, when one command's keys are a prefix of another's (`g` and `gg`), when the hint characters have fewer than two distinct characters, or when a regular expression does not compile.
 
