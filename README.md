@@ -82,7 +82,7 @@ Open the options page from the extension's "Details" → "Extension options".
 
 | Setting | Default | Description |
 | --- | --- | --- |
-| Keys | See [Keys](#️-keys) | Key sequence for each command |
+| Keys | See [Keys](#️-keys) | Key sequence for each command. Record captures the keys as you press them, and `Esc` finishes |
 | Hint characters | `asdfgqwertzxcvb` | Characters for hint labels, ordered from easiest to hardest |
 | Scroll step | `60` | Pixels scrolled per `h` / `j` / `k` / `l` |
 | Disabled URLs | (empty) | Regular expressions, one per line. Keyboard Utils is disabled on pages whose URL matches any of them |

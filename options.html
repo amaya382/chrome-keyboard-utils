@@ -37,6 +37,13 @@
         font: 13px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         padding: 4px 6px;
       }
+      .key-field {
+        display: flex;
+        gap: 6px;
+      }
+      .key-field input {
+        flex: 1;
+      }
       textarea {
         width: 100%;
         box-sizing: border-box;
@@ -60,7 +67,9 @@
     <form id="form">
       <fieldset id="keys">
         <legend>Keys</legend>
-        <p class="note">Special keys are written in angle brackets, e.g. <code>&lt;Enter&gt;</code>. Prefix with <code>S-</code> for Shift, e.g. <code>&lt;S-Enter&gt;</code>.</p>
+        <p class="note">
+          Click Record and press the keys, then Esc to finish. Special keys appear in angle brackets, e.g. <code>&lt;S-Enter&gt;</code> for Shift+Enter.
+        </p>
       </fieldset>
       <fieldset>
         <legend>Hints</legend>

@@ -1,5 +1,4 @@
 (() => {
-  const MODIFIER_KEYS = new Set(['Shift', 'Control', 'Alt', 'Meta', 'CapsLock', 'AltGraph']);
   const TEXT_INPUT_SELECTOR = [
     'input:not([type=hidden]):not([type=submit]):not([type=button]):not([type=reset]):not([type=image])' +
       ':not([type=checkbox]):not([type=radio]):not([type=file]):not([type=range]):not([type=color])',
@@ -75,9 +74,6 @@
   }
 
   const startsWith = (keys, prefix) => prefix.every((key, i) => keys[i] === key);
-
-  // Shift is already reflected in printable keys such as `G`, so only special keys carry an explicit `S-` prefix.
-  const keyName = (event) => (event.shiftKey && event.key.length > 1 ? `S-${event.key}` : event.key);
 
   // Registered at document_start in the capture phase so page shortcuts never see handled keys.
   window.addEventListener(

@@ -18,15 +18,58 @@ const scrollStepInput = document.getElementById('scrollStep');
 const patternsInput = document.getElementById('disabledUrlPatterns');
 const statusEl = document.getElementById('status');
 
+let recording = null;
+
+function stopRecording() {
+  if (!recording) return;
+  recording.button.textContent = 'Record';
+  recording.input.placeholder = '';
+  recording = null;
+}
+
+function createKeyField(text) {
+  const label = document.createElement('label');
+  const field = document.createElement('span');
+  field.className = 'key-field';
+  const input = document.createElement('input');
+  input.spellcheck = false;
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.textContent = 'Record';
+  field.append(input, button);
+  label.append(text, field);
+  keysFieldset.append(label);
+
+  // Keeps focus in the input so that clicking Stop does not end recording through blur first.
+  button.addEventListener('mousedown', (event) => event.preventDefault());
+  button.addEventListener('click', () => {
+    const wasRecording = recording?.input === input;
+    stopRecording();
+    if (wasRecording) return;
+    recording = { input, button };
+    input.value = '';
+    input.placeholder = 'Press keys, then Esc';
+    button.textContent = 'Stop';
+    input.focus();
+  });
+  input.addEventListener('keydown', (event) => {
+    if (recording?.input !== input || event.isComposing || MODIFIER_KEYS.has(event.key)) return;
+    if (event.ctrlKey || event.altKey || event.metaKey) return;
+    event.preventDefault();
+    if (event.key === 'Escape') {
+      stopRecording();
+      return;
+    }
+    input.value += formatKey(keyName(event));
+  });
+  input.addEventListener('blur', () => {
+    if (recording?.input === input) stopRecording();
+  });
+  return input;
+}
+
 const keyInputs = Object.fromEntries(
-  Object.entries(COMMAND_LABELS).map(([command, text]) => {
-    const label = document.createElement('label');
-    const input = document.createElement('input');
-    input.spellcheck = false;
-    label.append(text, input);
-    keysFieldset.append(label);
-    return [command, input];
-  }),
+  Object.entries(COMMAND_LABELS).map(([command, text]) => [command, createKeyField(text)]),
 );
 
 function render(settings) {

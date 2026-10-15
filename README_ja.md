@@ -82,7 +82,7 @@ Keyboard Utils は plain JavaScript で書いた Manifest V3 の Chrome 拡張�
 
 | 設定 | 既定値 | 説明 |
 | --- | --- | --- |
-| Keys | [Keys](#️-keys) を参照 | コマンドごとのキー列 |
+| Keys | [Keys](#️-keys) を参照 | コマンドごとのキー列。Record を押すと実際に押したキーをそのまま記録し、`Esc` で終わる |
 | Hint characters | `asdfgqwertzxcvb` | ヒントのラベルに使う文字。押しやすい順に並べる |
 | Scroll step | `60` | `h` / `j` / `k` / `l` 1 回でスクロールするピクセル数 |
 | Disabled URLs | (空) | 1 行に 1 つの正規表現。どれか 1 つでもページの URL に一致すると Keyboard Utils を無効にする |
